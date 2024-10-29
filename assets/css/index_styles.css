@@ -1,0 +1,291 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Times New Roman', serif; 
+  }
+  
+  body {
+    background-color: #ffffff; 
+    color: #000000; 
+  }
+  
+  /* Estilo del encabezado */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 2rem; 
+    background-color: #000000; 
+    color: #ffffff; 
+    z-index: 50;
+    width: 100%;
+  }
+  
+  .logo_img{
+    border-radius: 80px;
+    width: 40px;
+    position: absolute;
+    margin: 20px 80px 20px;
+    }
+  
+  /* Estilo de la navegación */
+  .navegacion a {
+    margin: 0 15px; 
+    color: #ffffff; 
+    text-decoration: none; 
+    font-size: 1rem; 
+  }
+  
+  .navegacion a:hover,
+  .navegacion a:focus {
+    text-decoration: underline; 
+  }
+  
+  .btn {
+    border-radius: 50px;
+    padding: 8px 16px; 
+    border: 2px solid blue; 
+    background-color: transparent; 
+    color: blue; 
+    font-size: 0.875rem; 
+    cursor: pointer; 
+    transition: background-color 0.3s, color 0.3s; 
+  }
+  
+  .btn:hover,
+  .btn:focus {
+    background-color: blue;
+    color: #ffffff; 
+  }
+  
+  
+  
+  
+  /* Estilo del Main */
+  main {
+    display: grid;
+    grid-template-columns: 1fr; /* Una columna que ocupa todo el ancho del contenedor */
+    gap: 40px; /* Espacio entre las cartas */
+    padding: 20px;
+    background-color: #ffffff; 
+    box-sizing: border-box;
+  }
+  
+  
+  main section {
+    background-color: #ffffff; 
+    border-radius: 8px; 
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);    Sombra de la carta */
+    padding: 20px; 
+    box-sizing: border-box; 
+  }
+  
+  
+  main section h2 {
+    text-align: center;
+    margin-top: 0; 
+    margin-bottom: 20px; 
+    font-size: 1.5em;
+    color: #333;
+  }
+  
+  .h2_img{
+    border-radius: 80px;
+    width: 40px;
+    position: flex;
+    margin-bottom: 20px;
+    }
+  
+  .info-final{
+    text-align: center;
+  }
+  
+  
+  /* Articulo final */
+  
+  article {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    gap: 10px; 
+    padding: 25px;
+    background-color: #f0f0f0; 
+    box-sizing: border-box;
+  }
+  
+  .span{
+    text-align: center;
+  }
+  
+  .btn2{
+    width: 100%;
+    height: 45px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #090f1d;
+    color: #F1EFEF;
+    margin-top: 5px;
+  }
+
+  
+  .boton{
+    width: 100%;
+    height: 45px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #090f1d;
+    color: #F1EFEF;
+  }
+  
+  button:active {
+    transform: scale(0.95);
+  }
+ 
+  
+  /* Estilo de la carta emergente */
+  .popup-overlay {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+  }
+  
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 45px;
+    height: 45px;
+    background-color: #090f1d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 25px;
+    z-index: 1;
+    font-size: 1.8em;
+    color: #F1EFEF;
+    cursor: pointer;
+  }
+  
+  .card-title {
+    text-align: center;
+    margin-top: 3px;
+    margin-bottom: 2px;
+  }
+  
+  .card_content{
+    padding: 10px;
+    text-decoration: none;
+  }
+  
+  .card_img{
+    border-radius: 100px;
+    box-shadow: 3px 3px 5px 3px #000;
+    width: 200px;
+    position: static;
+    margin-left: 160px;
+  }
+  
+  
+  
+  /* Estilo del footer */
+  footer.datos {
+    background-color: #000000; 
+    color: #ffffff; 
+    padding: 20px; 
+    text-align: center; 
+    position:static; /* Permite posicionar el footer correctamente si se necesitan ajustes adicionales */
+    border-top: 2px solid #333; 
+  }
+  
+  footer .contenido {
+    max-width: 1200px; 
+    margin: 0 auto; 
+  }
+  
+  footer p {
+    margin-bottom: 10px; 
+    font-size: 0.875rem; 
+  }
+  
+  
+  footer nav {
+    display: flex;
+    justify-content: center; 
+    gap: 20px; 
+  }
+  
+  
+  footer nav a {
+    color: #ffffff; 
+    text-decoration: none; 
+    font-size: 0.875rem; 
+    transition: color 0.3s; 
+  }
+  
+  footer nav a:hover,
+  footer nav a:focus {
+    color: #0a00c0; 
+    text-decoration: underline; 
+  }
+  
+  /* Ajusta el contenedor de las imágenes del carrusel a 50px x 50px */
+  .carousel-inner .carousel-item {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Ajusta las imágenes para que se ajusten al contenedor sin distorsión */
+  .carousel-inner .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Mantiene la proporción de la imagen y la recorta si es necesario */
+  }
+  
+  /* Ajusta el tamaño de los indicadores del carrusel */
+  .carousel-indicators button {
+    width: 50px;
+    height: 50px;
+    background-color: #000; /* Color de fondo de los indicadores */
+  }
+  
+  .carousel-indicators .active {
+    background-color: #fff; /* Color del indicador activo */
+  }
+  
+  /* Ajusta el tamaño de los controles del carrusel */
+  .carousel-control-prev, .carousel-control-next {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .carousel-control-prev-icon, .carousel-control-next-icon {
+    background-size: 50px 50px;
+  }
