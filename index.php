@@ -62,92 +62,99 @@ $currentYear = date('Y');
     </div>
 
     <main>
+    <section>
+        <h2><?php echo $siteName; ?></h2>
+        <p>
+            Bienvenidos a ParkSeo, el estacionamiento premium que revoluciona la forma de cuidar tu vehículo. 
+            Nuestras instalaciones de última generación cuentan con tecnología de vigilancia 24/7, iluminación 
+            LED inteligente y sistemas automatizados de control de acceso que garantizan la máxima seguridad 
+            para tu automóvil.
+
+            Ubicados estratégicamente en el corazón de la ciudad, ofrecemos más que un simple espacio de 
+            estacionamiento: brindamos una experiencia completa de servicio y tranquilidad. Nuestro personal 
+            altamente capacitado está siempre disponible para asistirte, mientras que nuestras amplias bahías 
+            de estacionamiento aseguran la integridad de tu vehículo.
+
+            Con certificación de calidad ISO 9001 y reconocidos con 5 estrellas por la Asociación Internacional 
+            de Estacionamientos, ParkSeo establece el estándar en servicios de estacionamiento de primera clase.
+            Disfruta de nuestras instalaciones climatizadas, sistema de reserva en línea y servicios adicionales 
+            que hacen de cada visita una experiencia excepcional.
+        </p>
+    </section>
+
+    <section>
+        <p>
+            En ParkSeo, la innovación se encuentra con la seguridad. Nuestro sistema de circuito cerrado con 
+            más de 100 cámaras de alta definición, guardias de seguridad certificados y control biométrico de 
+            acceso garantizan la protección total de tu vehículo. Además, nuestro seguro de cobertura completa 
+            te brinda la tranquilidad que mereces durante tu estancia.
+        </p>
+    </section>
+
+    <span class="span">DESCUBRE LO QUE TENEMOS PARA TI</span>
+
+    <article>
         <section>
-            <h2><?php echo $siteName; ?></h2>
+            <h2>Para empresas</h2>
             <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil facere eaque odio laborum dignissimos 
-                placeat ad totam dicta. Eligendi dicta ipsam voluptas necessitatibus officia quo, voluptatem quia 
-                enim tempora corporis.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima nihil impedit, quibusdam aut quo non 
-                accusantium iste omnis saepe accusamus, necessitatibus explicabo quasi doloremque voluptatibus sint 
-                consequuntur natus quaerat. Officiis?
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia distinctio saepe sequi vero quisquam 
-                aperiam maiores facilis, recusandae voluptates quis laudantium vel voluptatum amet fugit suscipit 
-                soluta possimus praesentium optio!
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste aliquid exercitationem ea corrupti 
-                blanditiis placeat eius obcaecati quis porro officia sint reiciendis quidem architecto quasi 
-                laudantium, possimus minima incidunt. Repudiandae.
+                Optimiza la gestión de tu flota empresarial con nuestros planes corporativos personalizados. 
+                Ofrecemos espacios reservados, facturación centralizada, reportes detallados de uso y acceso 
+                prioritario. Nuestro servicio de valet parking y sistema de gestión en tiempo real maximizarán 
+                la eficiencia de tus operaciones vehiculares.
+            </p>
+            <button class="btn2">Ver productos</button>
+        </section>
+
+        <section>
+            <h2>Para personas</h2>
+            <p>
+                Disfruta de una experiencia de estacionamiento sin preocupaciones con nuestras membresías 
+                personales. Incluyen lavado básico mensual, servicio de recarga para vehículos eléctricos, 
+                asistencia vehicular de emergencia y acceso a nuestra sala de espera VIP con café gourmet 
+                gratuito y Wi-Fi de alta velocidad.
+            </p>
+            <button class="btn2">Ver productos</button>
+        </section>
+    </article>
+
+    <section class="info-final">
+        <p>Tu vehículo merece lo mejor. Confía en <?php echo $siteName; ?> para una experiencia de 
+           estacionamiento 5 estrellas con la máxima seguridad y comodidad. ¡Te esperamos en ParkSeo, donde tu 
+           tranquilidad es nuestra prioridad!</p>
+    </section>
+
+    <article>
+        <section>
+            <h2>¿Por qué nosotros?</h2>
+            <p>
+                Elegir ParkSeo significa optar por la excelencia. Somos el único estacionamiento de la ciudad 
+                con certificación 5 estrellas, sistema anti-incendios de última generación y seguro de 
+                cobertura total. Nuestro compromiso con la satisfacción del cliente se refleja en nuestra 
+                calificación perfecta en servicios y atención personalizada.
             </p>
         </section>
 
         <section>
+            <h2>Ofertas</h2>
             <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil facere eaque odio laborum dignissimos 
-                placeat ad totam dicta. Eligendi dicta ipsam voluptas necessitatibus officia quo, voluptatem quia 
-                enim tempora corporis.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima nihil impedit, quibusdam aut quo non 
-                accusantium iste omnis saepe accusamus, necessitatibus explicabo quasi doloremque voluptatibus sint 
-                consequuntur natus quaerat. Officiis?
+                Aprovecha nuestras promociones exclusivas: 50% de descuento en tu primer mes de membresía, 
+                tarifas preferenciales para estancias largas, y paquetes especiales de fin de semana. 
+                Regístrate en nuestra aplicación móvil y obtén beneficios adicionales como reservas 
+                prioritarias y puntos canjeables por servicios premium.
             </p>
         </section>
 
-        <span class="span">DESCUBRE LO QUE TENEMOS PARA TI</span>
-
-        <article>
-            <section>
-                <h2>Para empresas</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum cumque aut, cupiditate vel 
-                    accusantium pariatur? Totam, similique porro eius, necessitatibus dolores perferendis 
-                    inventore quos vel temporibus autem ipsam delectus aliquam.
-                </p>
-                <button class="btn2">Ver productos</button>
-            </section>
-
-            <section>
-                <h2>Para personas</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum cumque aut, cupiditate vel 
-                    accusantium pariatur? Totam, similique porro eius, necessitatibus dolores perferendis 
-                    inventore quos vel temporibus autem ipsam delectus aliquam.
-                </p>
-                <button class="btn2">Ver productos</button>
-            </section>
-        </article>
-
-        <section class="info-final">
-            <p>Tu vehículo merece lo mejor. Confía en <?php echo $siteName; ?> para una experiencia de 
-               estacionamiento segura, conveniente y económica. ¡Te esperamos!</p>
+        <section>
+            <h2>Reglas</h2>
+            <p>
+                Para garantizar una experiencia excepcional, mantenemos estándares estrictos de seguridad y 
+                servicio. Contamos con protocolos de sanitización constante, espacios especialmente diseñados 
+                para vehículos de lujo y sistema de monitoreo ambiental. Tu seguridad y satisfacción son 
+                nuestra prioridad.
+            </p>
         </section>
-
-        <article>
-            <section>
-                <h2>¿Por que nosostros?</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum cumque aut, cupiditate vel 
-                    accusantium pariatur? Totam, similique porro eius, necessitatibus dolores perferendis 
-                    inventore quos vel temporibus autem ipsam delectus aliquam.
-                </p>
-            </section>
-
-            <section>
-                <h2>Ofertas</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum cumque aut, cupiditate vel 
-                    accusantium pariatur? Totam, similique porro eius, necessitatibus dolores perferendis 
-                    inventore quos vel temporibus autem ipsam delectus aliquam.
-                </p>
-            </section>
-
-            <section>
-                <h2>Reglas</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum cumque aut, cupiditate vel 
-                    accusantium pariatur? Totam, similique porro eius, necessitatibus dolores perferendis 
-                    inventore quos vel temporibus autem ipsam delectus aliquam.
-                </p>
-            </section>
-        </article>
+    </article>
+</main>
     </main>
 
     <footer class="datos">
@@ -160,6 +167,6 @@ $currentYear = date('Y');
         </div>
     </footer>
 
-    <script src="assets/js/index_script.js></script>
+    <script src="assets/js/index_script.js"></script>
 </body>
 </html>
