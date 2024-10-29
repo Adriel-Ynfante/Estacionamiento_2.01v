@@ -9,6 +9,7 @@ class Company {
         $database = new Database();
         $this->conn = $database->getConnection();
     }
+    
 
     public function getAll() {
         $stmt = $this->conn->prepare("SELECT * FROM " . $this->table);
