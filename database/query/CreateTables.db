@@ -89,5 +89,5 @@ CREATE TABLE Pagos (
     id_tarjeta INT,
     fecha_pago DATE,
     FOREIGN KEY (id_reserva) REFERENCES Reservas(id),
-    FOREIGN KEY (id_tarjeta) REFERENCES TARJETAS(id)
+    FOREIGN KEY (id_tarjeta) REFERENCES TARJETAS(id),
 );
