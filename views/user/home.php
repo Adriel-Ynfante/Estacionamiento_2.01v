@@ -18,10 +18,10 @@
             </div>
             <ul class="sidebar-menu">
                 <li><i data-lucide="user"></i><a href="perfil.php">Perfil </a></li>
-                <li><i data-lucide="settings"></i> <span>Configuración</span></li>
+                <li><i data-lucide="settings"></i><a href="reservar.php">Reservar</a></li>
                 <li><i data-lucide="log-out"></i> <span>Cerrar Sesión</span></li>
             </ul>
         </nav>
-        
+</div>  
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'database.php'; // conexión a la base de datos
+require_once __DIR__ . '/../config/database.php';; // conexión a la base de datos
 
 // Función para sanitizar la entrada
 function sanitizeInput($data) {

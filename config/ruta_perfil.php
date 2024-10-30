@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once './database.php'; // Asegúrate de incluir tu clase de conexión a la base de datos
+require_once __DIR__ . '/../config/database.php';; // Asegúrate de incluir tu clase de conexión a la base de datos
 
 // Conexión a la base de datos
 $database = new Database();
