@@ -25,6 +25,7 @@ CREATE TABLE Vehiculos (
 
 CREATE TABLE Empresas (
     id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre;
     descripcion VARCHAR(250),
     fecha_registro DATETIME
 );
@@ -43,6 +44,8 @@ CREATE TABLE Zonas (
     nombre VARCHAR(250),
     ubicacion VARCHAR(250),
     capacidad INT,
+    latitud,
+    longitud
     id_tarifa INT,
     FOREIGN KEY (id_tarifa) REFERENCES Tarifas(id),
     FOREIGN KEY (id_empresa) REFERENCES Empresas(id)
