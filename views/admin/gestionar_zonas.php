@@ -11,6 +11,7 @@ $zonaController->registerZone();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=xdevice-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/icons">
 </head>
 <body>
     <!-- SideBar -->
