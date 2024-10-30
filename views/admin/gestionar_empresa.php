@@ -1,3 +1,21 @@
+<?php
+require_once '../../config/database.php'; 
+require_once __DIR__ . '/../../controllers/CompanyController.php';
+
+$controller = new CompanyController();
+if (isset($_GET['success'])) {
+    echo "<p>Empresa registrada con éxito.</p>";
+}
+if (isset($_GET['error'])) {
+    echo "<p>Error al registrar la empresa.</p>";
+}
+if (isset($_GET['deleted'])) {
+    echo "<p>Empresa eliminada con éxito.</p>";
+}
+
+$companies = $controller->index();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -134,8 +152,8 @@
 							<div class="container-fluid">
 								<div class="row">
 									<div class="col-xs-12 col-md-10 col-md-offset-1">
-									    <form action="/models/zona.php" method="POST">
-                                            <div class="form-group label-floating">
+                                    <form action="../controllers/CompanyController.php?action=registrar" method="POST">
+                                    <div class="form-group label-floating">
                                                 <label class="control-label">Nombre</label>
                                                 <input class="form-control" type="text" id="nombre" name="nombre" required>
                                               </div>
@@ -144,7 +162,7 @@
 											  <input class="form-control" type="text" id="descripcion" name="descripcion" required>
 											</div>
 										    <p class="text-center">
-										    	<button href="#!" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Agregar Empresa</button>
+                                            <button type="submit" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Agregar Empresa</button>
 										    </p>
 									    </form>
 									</div>
@@ -165,7 +183,7 @@
 										</tr>
 									</thead>
 									<tbody>
-                                        <?php foreach ($companies as $company): ?>
+                                    <?php foreach ($companies as $company): ?>
 										<tr>
 											<td><?php echo htmlspecialchars($company['id']); ?></td>
 											<td><?php echo htmlspecialchars($company['descripcion']); ?></td>

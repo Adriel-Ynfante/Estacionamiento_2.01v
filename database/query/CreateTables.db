@@ -25,9 +25,9 @@ CREATE TABLE Vehiculos (
 
 CREATE TABLE Empresas (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre;
+    nombre VARCHAR(100) NOT NULL,
     descripcion VARCHAR(250),
-    fecha_registro DATETIME
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE Tarifas (
@@ -35,7 +35,8 @@ CREATE TABLE Tarifas (
     id_zona INT,  -- Llave foránea para asociar la tarifa con una zona específica
     tipo_vehiculo ENUM('motocicleta', 'auto') NOT NULL,
     tipo_reserva ENUM('hora', 'dia', 'semana', 'mes') NOT NULL,
-    costo DECIMAL(10,2) NOT NULL
+    costo DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (id_zona) REFERENCES Zonas(id)
 );
 
 CREATE TABLE Zonas (
@@ -44,10 +45,8 @@ CREATE TABLE Zonas (
     nombre VARCHAR(250),
     ubicacion VARCHAR(250),
     capacidad INT,
-    latitud,
-    longitud
-    id_tarifa INT,
-    FOREIGN KEY (id_tarifa) REFERENCES Tarifas(id),
+    latitud DECIMAL(10, 8),
+    longitud DECIMAL(11, 8),
     FOREIGN KEY (id_empresa) REFERENCES Empresas(id)
 );
 
@@ -57,6 +56,7 @@ CREATE TABLE Espacios (
     disponible BOOLEAN,
     FOREIGN KEY (id_zona) REFERENCES Zonas(id)
 );
+
 
 CREATE TABLE Reservas (
     id INT PRIMARY KEY AUTO_INCREMENT,
