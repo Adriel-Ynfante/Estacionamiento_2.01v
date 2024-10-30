@@ -23,5 +23,6 @@
             </ul>
         </nav>
 </div>  
+<script src="/assets/js/user_perfil.js"></script>
 </body>
 </html>

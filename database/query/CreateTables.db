@@ -22,6 +22,8 @@ CREATE TABLE Vehiculos (
     placa VARCHAR(20) UNIQUE,
     tipo ENUM('motocicleta', 'auto') NOT NULL,
     id_usuario INT,
+    modelo VARCHAR (60),
+    marca VARCHAR (60),
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
 );
 
