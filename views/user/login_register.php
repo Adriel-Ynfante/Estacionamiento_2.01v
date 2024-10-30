@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+<?php include '../../config/routes.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,12 +17,11 @@ session_start();
                 <a href="#"><i class="bi bi-twitter"></i></a>
                 <a href="#"><i class="bi bi-instagram"></i></a>
             </section>
-            <form action="<?php echo htmlspecialchars('/codLogin'); ?>" method="post">
+            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                 <div class="contenedor-input">
                     <span class="icono"><i class="bi bi-person-circle"></i></span>
-                    <input type="email" id="emailLogin" name="emailLogin" required 
-                           value="<?php echo isset($_POST['emailLogin']) ? htmlspecialchars($_POST['emailLogin']) : ''; ?>">
-                    <label for="emailLogin">Correo Electonico</label>
+                    <input type="email" id="emailLogin" name="emailLogin" required>
+                    <label for="emailLogin">Correo Electrónico</label>
                 </div>
                 <div class="contenedor-input">
                     <span class="icono"><i class="bi bi-lock-fill"></i></span>
@@ -33,11 +30,11 @@ session_start();
                 </div>
                 <div class="recordar">
                     <label>
-                        <input type="checkbox" name="remember" <?php echo isset($_POST['remember']) ? 'checked' : ''; ?>> Recordar
+                        <input type="checkbox" name="remember"> Recordar
                     </label>
                     <a href="#">¿Olvidé la contraseña?</a>
                 </div>
-                <button type="submit" class="boton">Acceder</button>
+                <button type="submit" class="boton" name="login">Acceder</button>
                 <div class="registrar">
                     <p>No tengo cuenta | <a href="#" class="registrar-link">Registrarse</a></p>
                 </div>
@@ -51,17 +48,15 @@ session_start();
                 <a href="#"><i class="bi bi-twitter"></i></a>
                 <a href="#"><i class="bi bi-instagram"></i></a>
             </section>
-            <form id="register" action="<?php echo htmlspecialchars('/regUsuario'); ?>" method="post">
+            <form id="register" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                 <div class="contenedor-input">
                     <span class="icono"><i class="bi bi-person-circle"></i></span>
-                    <input type="text" id="userReg" name="userReg" required
-                           value="<?php echo isset($_POST['userReg']) ? htmlspecialchars($_POST['userReg']) : ''; ?>">
+                    <input type="text" id="userReg" name="userReg" required>
                     <label for="userReg">Nombre de usuario</label>
                 </div>
                 <div class="contenedor-input">
                     <span class="icono"><i class="bi bi-envelope"></i></span>
-                    <input type="email" id="emailReg" name="emailReg" required
-                           value="<?php echo isset($_POST['emailReg']) ? htmlspecialchars($_POST['emailReg']) : ''; ?>">
+                    <input type="email" id="emailReg" name="emailReg" required>
                     <label for="emailReg">Correo Electrónico</label>
                 </div>
                 <div class="contenedor-input">
@@ -71,8 +66,7 @@ session_start();
                 </div>
                 <div class="recordar">
                     <label>
-                        <input type="checkbox" required name="terms"
-                               <?php echo isset($_POST['terms']) ? 'checked' : ''; ?>> Acepto los términos y condiciones
+                        <input type="checkbox" required name="terms"> Acepto los términos y condiciones
                     </label>
                 </div>
                 <button type="submit" class="boton" name="registrar">Registrarme</button>
@@ -82,7 +76,9 @@ session_start();
             </form>
         </div>
     </div>
+    
     <?php
+    // Mostrar mensajes de error o éxito
     if (isset($_SESSION['error'])) {
         echo '<div class="alert alert-danger">' . htmlspecialchars($_SESSION['error']) . '</div>';
         unset($_SESSION['error']);
@@ -92,6 +88,7 @@ session_start();
         unset($_SESSION['success']);
     }
     ?>
-<script src="/assets/js/login_register.js"></script>
+    
+    <script src="/assets/js/login_register.js"></script>
 </body>
 </html>
