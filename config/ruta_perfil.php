@@ -7,8 +7,8 @@ $database = new Database();
 $db = $database->getConnection();
 
 // Obtener datos del usuario
-if (isset($_SESSION['user_id'])) {
-    $userId = $_SESSION['user_id'];
+if (isset($_SESSION['id'])) {
+    $userId = $_SESSION['id'];
     $sql = "SELECT * FROM usuarios WHERE id = :id";
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':id', $userId);
@@ -18,6 +18,11 @@ if (isset($_SESSION['user_id'])) {
     // Redirigir si no hay sesión activa
     header("Location: login_register.php");
     exit();
+}
+
+// Función para sanitizar la entrada
+function sanitizeInput($data) {
+    return htmlspecialchars(strip_tags(trim($data)));
 }
 
 // Manejo de actualización del perfil
@@ -80,6 +85,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     exit();
 }
 
-function sanitizeInput($data) {
-    return htmlspecialchars(strip_tags(trim($data)));
+// Manejo de carga de foto de perfil
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['foto'])) {
+    $file = $_FILES['foto'];
+
+    // Validar tipo y tamaño del archivo
+    $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    $maxFileSize = 2 * 1024 * 1024; // 2 MB
+
+    if (in_array($file['type'], $allowedTypes) && $file['size'] <= $maxFileSize) {
+        $targetDir = "assets/images/"; // Asegúrate de que esta carpeta tenga permisos de escritura
+        $targetFile = $targetDir . basename($file["name"]);
+
+        if (move_uploaded_file($file["tmp_name"], $targetFile)) {
+            // Actualiza la ruta de la imagen en la base de datos
+            $updatePhotoSql = "UPDATE usuarios SET foto_perfil = :foto WHERE id = :id";
+            $updatePhotoStmt = $db->prepare($updatePhotoSql);
+            $updatePhotoStmt->bindParam(':foto', $targetFile);
+            $updatePhotoStmt->bindParam(':id', $userId);
+
+            if ($updatePhotoStmt->execute()) {
+                echo json_encode(['success' => true, 'foto' => $targetFile]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Error al actualizar la base de datos.']);
+            }
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Error al mover el archivo.']);
+        }
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Archivo no válido o demasiado grande.']);
+    }
+    exit();
 }
