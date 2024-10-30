@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let editMode = false;
 
+    // Función para alternar la visibilidad del menú lateral
     function toggleSidebar() {
         sidebar.classList.toggle('minimized');
         const menuTitle = document.querySelector('.menu-title');
@@ -33,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         lucide.createIcons();
     }
 
+    // Función para alternar el modo de edición del perfil
     function toggleEditMode() {
         editMode = !editMode;
         const inputs = profileForm.querySelectorAll('input, textarea');
@@ -43,43 +45,39 @@ document.addEventListener('DOMContentLoaded', function() {
         editProfileBtn.textContent = editMode ? 'Cancelar' : 'Editar Perfil';
     }
 
+    // Manejo del cambio de archivo de la foto de perfil
     async function handleFileChange(event) {
         const file = event.target.files[0];
-        if (file) {
-            const formData = new FormData();
-            formData.append('foto', file);
+        if (!file) return;
 
-            try {
-                const response = await fetch('/usuario/foto', {
-                    method: 'POST',
-                    body: formData
-                });
+        const formData = new FormData();
+        formData.append('foto', file);
 
-                const result = await response.json();
-                if (result.success) {
-                    profilePicture.innerHTML = `<img src="${result.foto}" alt="Foto de perfil">`;
-                } else {
-                    alert('Error al actualizar la foto de perfil');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Error al actualizar la foto de perfil');
+        try {
+            const response = await fetch('perfil.php', { method: 'POST', body: formData });
+            const result = await response.json();
+
+            if (result.success) {
+                profilePicture.innerHTML = `<img src="${result.foto}" alt="Foto de perfil">`;
+            } else {
+                alert('Error al actualizar la foto de perfil: ' + result.message);
             }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error al actualizar la foto de perfil. Por favor, inténtalo de nuevo.');
         }
     }
 
+    // Guardar cambios en el perfil
     async function saveProfile(event) {
         event.preventDefault();
         const formData = new FormData(profileForm);
         const datos = Object.fromEntries(formData.entries());
 
         try {
-            const response = await fetch('/usuario/actualizar', {
+            const response = await fetch('perfil.php', { // La URL apunta al mismo perfil.php
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(datos)
+                body: new URLSearchParams(datos)
             });
 
             const result = await response.json();
@@ -87,14 +85,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Perfil actualizado exitosamente');
                 toggleEditMode();
             } else {
-                alert('Error al actualizar el perfil');
+                alert('Error al actualizar el perfil: ' + result.message);
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Error al actualizar el perfil');
+            alert('Error al actualizar el perfil. Por favor, inténtalo de nuevo.');
         }
     }
 
+    // Agregar una tarjeta de crédito
     async function addCard(event) {
         event.preventDefault();
         const newCard = {
@@ -103,12 +102,10 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         try {
-            const response = await fetch('/usuario/tarjeta', {
+            const response = await fetch('perfil.php', { // La URL apunta al mismo perfil.php
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newCard)
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'addCard', ...newCard })
             });
 
             const result = await response.json();
@@ -117,14 +114,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 addCardForm.reset();
                 addCardForm.style.display = 'none';
             } else {
-                alert('Error al agregar tarjeta');
+                alert('Error al agregar tarjeta: ' + result.message);
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Error al agregar tarjeta');
+            alert('Error al agregar tarjeta. Por favor, inténtalo de nuevo.');
         }
     }
 
+    // Agregar un vehículo
     async function addVehicle(event) {
         event.preventDefault();
         const newVehicle = {
@@ -134,12 +132,10 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         try {
-            const response = await fetch('/usuario/vehiculo', {
+            const response = await fetch('perfil.php', { // La URL apunta al mismo perfil.php
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newVehicle)
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'addVehicle', ...newVehicle })
             });
 
             const result = await response.json();
@@ -148,14 +144,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 addVehicleForm.reset();
                 addVehicleForm.style.display = 'none';
             } else {
-                alert('Error al agregar vehículo');
+                alert('Error al agregar vehículo: ' + result.message);
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Error al agregar vehículo');
+            alert('Error al agregar vehículo. Por favor, inténtalo de nuevo.');
         }
     }
 
+    // Eventos de los botones
     toggleSidebarBtn.addEventListener('click', toggleSidebar);
     editProfileBtn.addEventListener('click', toggleEditMode);
     fileInput.addEventListener('change', handleFileChange);

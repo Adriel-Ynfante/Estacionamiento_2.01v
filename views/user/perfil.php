@@ -1,3 +1,7 @@
+<?php
+include '../../config/ruta_perfil.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -34,26 +38,26 @@
                 </div>
                 <div class="profile-right">
                     <h2>Perfil de Usuario</h2>
-                    <form id="profileForm">
+                    <form id="profileForm" method="POST" action="">
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="nombre">Nombre</label>
-                                <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($datos['codnombre']); ?>" disabled>
+                                <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($datos['nombre']); ?>" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($datos['codemail']); ?>" disabled>
+                                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($datos['email']); ?>" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="telefono">Teléfono</label>
-                                <input type="tel" id="telefono" name="telefono" value="<?php echo htmlspecialchars($datos['telefono'] ?? '123-456-7890'); ?>" disabled>
+                                <input type="tel" id="telefono" name="telefono" value="<?php echo htmlspecialchars($datos['telefono'] ?? ''); ?>" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="direccion">Dirección</label>
-                                <textarea id="direccion" name="direccion" disabled><?php echo htmlspecialchars($datos['direccion'] ?? 'Calle Principal 123, Ciudad'); ?></textarea>
+                                <textarea id="direccion" name="direccion" disabled><?php echo htmlspecialchars($datos['direccion'] ?? ''); ?></textarea>
                             </div>
                         </div>
-                        <button type="submit" class="btn save-btn" style="display: none;">Guardar Cambios</button>
+                        <button type="submit" name="updateProfile" class="btn save-btn" style="display: none;">Guardar Cambios</button>
                     </form>
                 </div>
             </div>
