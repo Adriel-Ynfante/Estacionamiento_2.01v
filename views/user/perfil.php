@@ -16,8 +16,8 @@ include '../../config/ruta_perfil.php';
     <div class="container">
         <nav id="sidebar" class="sidebar">
             <div class="sidebar-header">
-                <span class="menu-title">Menu</span>
-                <button id="toggleSidebar" class="toggle-sidebar">
+                <span class="menu-title">Menú</span>
+                <button id="toggleSidebar" class="toggle-sidebar" aria-label="Alternar menú">
                     <i data-lucide="menu"></i>
                 </button>
             </div>
@@ -27,11 +27,12 @@ include '../../config/ruta_perfil.php';
                 <li><i data-lucide="log-out"></i> <span>Cerrar Sesión</span></li>
             </ul>
         </nav>
+        
         <main class="content">
             <div class="card profile-card">
                 <div class="profile-left">
                     <div class="profile-picture" id="profilePicture">
-                        <span class="default-avatar">👤</span>
+                        <span class="default-avatar" role="img" aria-label="Avatar de usuario">👤</span>
                     </div>
                     <input type="file" id="fileInput" accept="image/*" style="display: none;">
                     <button id="editProfileBtn" class="btn">Editar Perfil</button>
@@ -64,16 +65,16 @@ include '../../config/ruta_perfil.php';
 
             <div class="card-grid">
                 <div class="card">
-                    <h2>Tarjetas de Crédito <button id="addCardBtn" class="btn-icon"><i data-lucide="plus-circle"></i></button></h2>
+                    <h2>Tarjetas de Crédito <button id="addCardBtn" class="btn-icon" aria-label="Agregar tarjeta"><i data-lucide="plus-circle"></i></button></h2>
                     <div id="cardList"></div>
                     <form id="addCardForm" style="display: none;">
                         <input type="text" name="numero" placeholder="Número de tarjeta" required>
-                        <input type="text" name="expiracion" placeholder="MM/YY" required>
+                        <input type="text" name="expiracion" placeholder="MM/AA" required>
                         <button type="submit" class="btn">Agregar Tarjeta</button>
                     </form>
                 </div>
                 <div class="card">
-                    <h2>Vehículos <button id="addVehicleBtn" class="btn-icon"><i data-lucide="plus-circle"></i></button></h2>
+                    <h2>Vehículos <button id="addVehicleBtn" class="btn-icon" aria-label="Agregar vehículo"><i data-lucide="plus-circle"></i></button></h2>
                     <div id="vehicleList"></div>
                     <form id="addVehicleForm" style="display: none;">
                         <input type="text" name="marca" placeholder="Marca" required>
@@ -94,7 +95,7 @@ include '../../config/ruta_perfil.php';
                             <button class="btn-outline">Cambiar</button>
                         </div>
                         <div class="group">
-                            <input class="input" type="password">
+                            <input class="input" type="password" placeholder="Nueva contraseña">
                         </div>
                     </div>
                     <div class="setting-item">
@@ -102,7 +103,7 @@ include '../../config/ruta_perfil.php';
                             <i data-lucide="bell"></i>
                             <span>Recibir notificaciones</span>
                             <label>
-                                <input type="checkbox" class="input">
+                                <input type="checkbox" class="input" id="notificaciones">
                                 <span class="custom-checkbox"></span>
                             </label>
                         </label>
@@ -111,6 +112,10 @@ include '../../config/ruta_perfil.php';
                         <label for="terminos" class="setting-label">
                             <i data-lucide="file-text"></i>
                             <span>Acepto los términos y condiciones</span>
+                            <label>
+                                <input type="checkbox" class="input" id="terminos">
+                                <span class="custom-checkbox"></span>
+                            </label>
                         </label>
                     </div>
                 </div>

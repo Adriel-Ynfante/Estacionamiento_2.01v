@@ -39,8 +39,9 @@ if (isset($_POST['registrar'])) {
 
     // Intentar ejecutar la consulta
     if ($stmt->execute()) {
-        $_SESSION['success'] = "Registro exitoso. Puedes iniciar sesión.";
-        header("Location: login_register.php"); // Redirigir a la misma página para evitar reenvíos
+        // Guardar el mensaje de éxito en la sesión
+        $_SESSION['success'] = "Bienvenido, $nombreUsuario! Registro exitoso.";
+        header("Location: perfil.php"); // Redirigir a la página de perfil
         exit();
     } else {
         $_SESSION['error'] = "Error al registrar. Intenta nuevamente.";
@@ -70,7 +71,7 @@ if (isset($_POST['login'])) {
             $_SESSION['user_id'] = $usuario['id']; // Suponiendo que tienes un campo 'id'
             $_SESSION['tipo_usuario'] = $usuario['tipo_usuario']; // Guardar el rol en la sesión
             $_SESSION['success'] = "Inicio de sesión exitoso.";
-            header("Location: pagos.php"); // Redirigir a una página de éxito
+            header("Location: /views/user/perfil.php"); // Redirigir a una página de éxito
             exit();
         } else {
             $_SESSION['error'] = "Contraseña incorrecta.";
@@ -79,4 +80,3 @@ if (isset($_POST['login'])) {
         $_SESSION['error'] = "Correo no encontrado.";
     }
 }
-

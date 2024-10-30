@@ -42,6 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['updateProfile'])) {
         exit();
     } else {
         $_SESSION['error'] = "Error al actualizar el perfil. Intenta nuevamente.";
+        header("Location: perfil.php"); // Redirigir incluso en caso de error
+        exit();
     }
 }
 
