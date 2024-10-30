@@ -71,7 +71,7 @@ if (isset($_POST['login'])) {
             $_SESSION['user_id'] = $usuario['id']; // Suponiendo que tienes un campo 'id'
             $_SESSION['tipo_usuario'] = $usuario['tipo_usuario']; // Guardar el rol en la sesión
             $_SESSION['success'] = "Inicio de sesión exitoso.";
-            header("Location: /views/user/perfil.php"); // Redirigir a una página de éxito
+            header("Location: perfil.php"); // Redirigir a una página de éxito
             exit();
         } else {
             $_SESSION['error'] = "Contraseña incorrecta.";
