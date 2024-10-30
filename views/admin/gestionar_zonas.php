@@ -135,7 +135,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-xs-12 col-md-10 col-md-offset-1">
-                                        <form action="/admin/zones/create" method="POST">
+                                        <form action="/models/zona.php" method="POST">
 
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Nombre de la Zona</label>

@@ -1,6 +1,6 @@
 <?php
-require_once '../config/database.php';
-require_once '../app/models/Zona.php';
+require_once './config/database.php';
+require_once './models/zona.php';
 
 class ZonaController {
     private $zonaModel;
@@ -32,13 +32,10 @@ class ZonaController {
             ];
 
             if ($this->zonaModel->registrar($nombre, $ubicacion, $capacidad, $id_empresa, $latitud, $longitud, $tarifas)) {
-                header("Location: /public/index.php?action=listar_zonas");
+                header("Location: zona.php");
             } else {
                 echo "Error al registrar la zona y tarifas.";
             }
         }
     }
 }
-?>
-
-
