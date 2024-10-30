@@ -33,29 +33,25 @@ document.addEventListener('DOMContentLoaded', function() {
     // Función para alternar el modo de edición del perfil
     function toggleEditMode() {
         const editMode = Array.from(inputs).some(input => !input.disabled);
-
         inputs.forEach(input => input.disabled = editMode);
         saveBtn.style.display = editMode ? 'none' : 'block';
-        editProfileBtn.textContent = editMode ? 'Editar Perfil' : 'Cancelar';
+        editProfileBtn.textContent = editMode ? 'Cancelar' : 'Editar Perfil';
     }
 
-    // Función para mostrar/ocultar el formulario de agregar tarjeta
-    addCardBtn.addEventListener('click', () => {
-        addCardForm.style.display = addCardForm.style.display === 'none' ? 'block' : 'none';
-    });
+    // Función para mostrar/ocultar el formulario
+    function toggleVisibility(element) {
+        element.style.display = element.style.display === 'none' ? 'block' : 'none';
+    }
 
-    // Función para mostrar/ocultar el formulario de agregar vehículo
-    addVehicleBtn.addEventListener('click', () => {
-        addVehicleForm.style.display = addVehicleForm.style.display === 'none' ? 'block' : 'none';
-    });
+    // Eventos para mostrar/ocultar formularios
+    addCardBtn.addEventListener('click', () => toggleVisibility(addCardForm));
+    addVehicleBtn.addEventListener('click', () => toggleVisibility(addVehicleForm));
 
     // Evento para el botón de editar perfil
     editProfileBtn.addEventListener('click', toggleEditMode);
-
     toggleSidebarBtn.addEventListener('click', toggleSidebar);
 
-
-        // Manejo del cambio de archivo de la foto de perfil
+    // Manejo del cambio de archivo de la foto de perfil
     async function handleFileChange(event) {
         const file = event.target.files[0];
         if (!file) return;
@@ -64,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('foto', file);
 
         try {
-            const response = await fetch('/assets/images', { // Cambia esta ruta según tu configuración
+            const response = await fetch('./assets/uploads', { // Cambia esta ruta según tu configuración
                 method: 'POST',
                 body: formData
             });
@@ -85,5 +81,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Evento para manejar el cambio de archivo
     document.getElementById('fileInput').addEventListener('change', handleFileChange);
-
 });

@@ -7,12 +7,14 @@ CREATE TABLE Usuarios (
     apellido VARCHAR(250),
     telefono VARCHAR(12),
     email VARCHAR(250) UNIQUE,
+    direccion VARCHAR(60),
     password VARCHAR(250),
     tipo_usuario ENUM('usuario', 'administrador') NOT NULL,
+    foto_perfil VARCHAR(255),
     token VARCHAR(40),
     token_password VARCHAR(40),
     password_request INT,
-    fecha_registro DATETIME
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE Vehiculos (
@@ -20,6 +22,8 @@ CREATE TABLE Vehiculos (
     placa VARCHAR(20) UNIQUE,
     tipo ENUM('motocicleta', 'auto') NOT NULL,
     id_usuario INT,
+    modelo VARCHAR (60),
+    marca VARCHAR (60),
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
 );
 

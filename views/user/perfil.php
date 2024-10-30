@@ -1,5 +1,5 @@
 <?php
-include './config/ruta_perfil.php';
+include '../../config/ruta_perfil.php';
 ?>
 
 <!DOCTYPE html>
