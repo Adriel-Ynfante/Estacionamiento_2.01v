@@ -48,7 +48,6 @@ CREATE TABLE Zonas (
     id_empresa INT,
     nombre VARCHAR(250),
     ubicacion VARCHAR(250),
-    capacidad INT,
     latitud DECIMAL(10, 8),
     longitud DECIMAL(11, 8),
     FOREIGN KEY (id_empresa) REFERENCES Empresas(id)
@@ -57,10 +56,10 @@ CREATE TABLE Zonas (
 CREATE TABLE Espacios (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_zona INT,
-    disponible BOOLEAN,
+    numero INT,
+    disponible BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (id_zona) REFERENCES Zonas(id)
 );
-
 
 CREATE TABLE Reservas (
     id INT PRIMARY KEY AUTO_INCREMENT,

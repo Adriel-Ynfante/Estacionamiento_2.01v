@@ -3,29 +3,33 @@ require_once __DIR__ . '/../models/Space.php';
 require_once __DIR__ . '/../config/database.php';
 
 class SpaceController {
-    private $conn;
-
-    public function __construct() {
+    public function occupySpace($id_space) {
         $database = new Database();
-        $this->conn = $database->getConnection();
+        $db = $database->getConnection();
+
+        $query = "UPDATE Espacios SET disponible = FALSE WHERE id = ? AND disponible = TRUE";
+        $stmt = $db->prepare($query);
+        return $stmt->execute([$id_space]);
     }
 
-    public function occupySpace($space_id) {
-        $space = new Space($this->conn);
-        if ($space->updateAvailability($space_id, false)) { // Cambiar a false para ocupar
-            echo "Espacio ocupado.";
-        } else {
-            echo "Error al ocupar el espacio.";
-        }
+    public function freeSpace($id_space) {
+        $database = new Database();
+        $db = $database->getConnection();
+
+        $query = "UPDATE Espacios SET disponible = TRUE WHERE id = ? AND disponible = FALSE";
+        $stmt = $db->prepare($query);
+        return $stmt->execute([$id_space]);
     }
 
-    public function freeSpace($space_id) {
-        $space = new Space($this->conn);
-        if ($space->updateAvailability($space_id, true)) { // Cambiar a true para liberar
-            echo "Espacio liberado.";
-        } else {
-            echo "Error al liberar el espacio.";
-        }
+    public function getAvailableSpaces($id_zona) {
+        $database = new Database();
+        $db = $database->getConnection();
+
+        $query = "SELECT * FROM Espacios WHERE id_zona = ? AND disponible = TRUE";
+        $stmt = $db->prepare($query);
+        $stmt->execute([$id_zona]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>
+
