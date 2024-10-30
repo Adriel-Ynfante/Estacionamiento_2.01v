@@ -160,11 +160,6 @@ $zonaController->registerZone();
                                             </div>
 
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Capacidad</label>
-                                                <input class="form-control" type="number" id="capacidad" name="capacidad" required>
-                                            </div>
-
-                                            <div class="form-group label-floating">
                                                 <label class="control-label">Latitud</label>
                                                 <input class="form-control" type="text" name="latitud"  required>
                                             </div>
@@ -174,6 +169,9 @@ $zonaController->registerZone();
                                                 <input class="form-control" type="text" name="longitud" required>
                                             </div>
                                             
+                                            <label class="control-label">Capacidad (Número de Espacios):</label>
+                                            <input type="number" name="capacidad" class="form-control" required><br>
+
                                             <p class="text-center">
                                                 <button type="submit" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Agregar Zona</button>
                                             </p>
