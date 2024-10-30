@@ -1,41 +1,60 @@
 <?php
-require_once './config/database.php';
-require_once './models/zona.php';
+require_once __DIR__ . '/../models/zona.php';
+require_once __DIR__ . '/../models/space.php';
+require_once __DIR__ . '/../config/database.php';
 
-class ZonaController {
-    private $zonaModel;
-
-    public function __construct() {
+class ZoneController {
+    public function registerZone() {
         $database = new Database();
-        $this->zonaModel = new Zona($database);
+        $db = $database->getConnection();
+
+        $zone = new Zone($db);
+        
+        // Asignar valores desde POST
+        $zone->id_empresa = $_POST['id_empresa'] ?? null;
+        $zone->nombre = $_POST['nombre'] ?? null;
+        $zone->ubicacion = $_POST['ubicacion'] ?? null;
+        $zone->capacidad = $_POST['capacidad'] ?? null;
+        $zone->latitud = $_POST['latitud'] ?? null;
+        $zone->longitud = $_POST['longitud'] ?? null;
+
+        // Validaciones adicionales
+        if (!$this->validateZone($  )) {
+            echo "Error: Datos de zona inválidos.";
+            return;
+        }
+
+        if ($zone->create()) {
+            // Crear espacios después de que la zona ha sido creada
+            $this->createSpaces($zone->id, $zone->capacidad);
+            echo "Zona y espacios registrados exitosamente.";
+        } else {
+            echo "Error al registrar la zona.";
+        }
     }
 
-    public function registrar() {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $nombre = $_POST['nombre'];
-            $ubicacion = $_POST['ubicacion'];
-            $capacidad = $_POST['capacidad'];
-            $id_empresa = $_POST['id_empresa'];
-            $latitud = $_POST['latitud'];
-            $longitud = $_POST['longitud'];
+    private function validateZone($zone) {
+        // Verificar que id_empresa sea un número válido
+        if (!is_numeric($zone->id_empresa) || $zone->id_empresa <= 0) {
+            return false;
+        }
+        // Validar otros atributos en la clase Zone
+        return $zone->validateInputs(); // Asegúrate de que este método exista
+    }
+    
 
-            // Obtener tarifas del formulario
-            $tarifas = [
-                ['tipo_vehiculo' => 'motocicleta', 'tipo_reserva' => 'hora', 'costo' => $_POST['motocicleta_hora']],
-                ['tipo_vehiculo' => 'motocicleta', 'tipo_reserva' => 'dia', 'costo' => $_POST['motocicleta_dia']],
-                ['tipo_vehiculo' => 'motocicleta', 'tipo_reserva' => 'semana', 'costo' => $_POST['motocicleta_semana']],
-                ['tipo_vehiculo' => 'motocicleta', 'tipo_reserva' => 'mes', 'costo' => $_POST['motocicleta_mes']],
-                ['tipo_vehiculo' => 'auto', 'tipo_reserva' => 'hora', 'costo' => $_POST['auto_hora']],
-                ['tipo_vehiculo' => 'auto', 'tipo_reserva' => 'dia', 'costo' => $_POST['auto_dia']],
-                ['tipo_vehiculo' => 'auto', 'tipo_reserva' => 'semana', 'costo' => $_POST['auto_semana']],
-                ['tipo_vehiculo' => 'auto', 'tipo_reserva' => 'mes', 'costo' => $_POST['auto_mes']],
-            ];
+    private function createSpaces($id_zona, $capacidad) {
+        $database = new Database();
+        $db = $database->getConnection();
 
-            if ($this->zonaModel->registrar($nombre, $ubicacion, $capacidad, $id_empresa, $latitud, $longitud, $tarifas)) {
-                header("Location: zona.php");
-            } else {
-                echo "Error al registrar la zona y tarifas.";
-            }
+        for ($i = 0; $i < $capacidad; $i++) {
+            $space = new Space($db);
+            $space->id_zona = $id_zona; // Asignar el ID de la zona recién creada
+            $space->disponible = true; // Marcar el espacio como disponible
+
+            $space->create(); // Registrar el espacio
         }
     }
 }
+
+?>

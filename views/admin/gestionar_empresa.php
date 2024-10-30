@@ -1,19 +1,8 @@
 <?php
-require_once '../../config/database.php'; 
-require_once __DIR__ . '/../../controllers/CompanyController.php';
+require_once '../../controllers/CompanyController.php';
 
-$controller = new CompanyController();
-if (isset($_GET['success'])) {
-    echo "<p>Empresa registrada con éxito.</p>";
-}
-if (isset($_GET['error'])) {
-    echo "<p>Error al registrar la empresa.</p>";
-}
-if (isset($_GET['deleted'])) {
-    echo "<p>Empresa eliminada con éxito.</p>";
-}
-
-$companies = $controller->index();
+$companyController = new CompanyController();
+$companyController->registerCompany();
 ?>
 
 <!DOCTYPE html>
@@ -152,7 +141,7 @@ $companies = $controller->index();
 							<div class="container-fluid">
 								<div class="row">
 									<div class="col-xs-12 col-md-10 col-md-offset-1">
-                                    <form action="../controllers/CompanyController.php?action=registrar" method="POST">
+									<form action="gestionar_empresa.php" method="POST">
                                     <div class="form-group label-floating">
                                                 <label class="control-label">Nombre</label>
                                                 <input class="form-control" type="text" id="nombre" name="nombre" required>

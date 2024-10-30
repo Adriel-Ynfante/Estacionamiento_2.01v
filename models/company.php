@@ -1,27 +1,32 @@
 <?php
 class Company {
     private $conn;
-    private $table = 'Empresas';
+    private $table_name = "Empresas";
+
+    public $id;
+    public $nombre;
+    public $descripcion;
+    public $fecha_registro;
 
     public function __construct($db) {
         $this->conn = $db;
     }
-    
-    public function registrarEmpresa($nombre, $descripcion) {
-        $stmt = $this->conn->prepare("INSERT INTO $this->table (nombre, descripcion, fecha_registro) VALUES (?, ?, NOW())");
-        return $stmt->execute([$nombre, $descripcion]);
-    }
 
-    public function getAll() {
-        $stmt = $this->conn->prepare("SELECT * FROM " . $this->table);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    // Método para registrar una nueva empresa
+    public function create() {
+        $query = "INSERT INTO " . $this->table_name . " SET nombre=:nombre, descripcion=:descripcion";
+        $stmt = $this->conn->prepare($query);
 
-    public function delete($id) {
-        $stmt = $this->conn->prepare("DELETE FROM " . $this->table . " WHERE id = :id");
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        return $stmt->execute();
+        $this->nombre = htmlspecialchars(strip_tags($this->nombre));
+        $this->descripcion = htmlspecialchars(strip_tags($this->descripcion));
+
+        $stmt->bindParam(":nombre", $this->nombre);
+        $stmt->bindParam(":descripcion", $this->descripcion);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
     }
 }
 ?>

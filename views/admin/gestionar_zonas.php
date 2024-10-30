@@ -1,9 +1,15 @@
+<?php
+require_once '../../controllers/ZonaController.php';
+
+$zonaController = new ZoneController();
+$zonaController->registerZone();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <title>Gestionar Zonas</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=xdevice-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
@@ -135,9 +141,15 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-xs-12 col-md-10 col-md-offset-1">
-                                        <form action="/models/zona.php" method="POST">
+                                        <form action="gestionar_zonas.php" method="POST">
+    
+                                            
+                                        <div class="form-group label-floating">
+                                                <label class="control-label">ID Empresa:</label>
+                                                <input class="form-control"  type="number" name="id_empresa" required>
+                                            </div>
 
-                                            <div class="form-group label-floating">
+                                        <div class="form-group label-floating">
                                                 <label class="control-label">Nombre de la Zona</label>
                                                 <input class="form-control" type="text" id="nombre" name="nombre" required>
                                             </div>
@@ -153,11 +165,6 @@
                                             </div>
 
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Empresa</label>
-                                                <input class="form-control" type="text" id="id_empresa" name="id_empresa" required>
-                                            </div>
-
-                                            <div class="form-group label-floating">
                                                 <label class="control-label">Latitud</label>
                                                 <input class="form-control" type="text" name="latitud"  required>
                                             </div>
@@ -167,52 +174,8 @@
                                                 <input class="form-control" type="text" name="longitud" required>
                                             </div>
                                             
-                                            <h2>Tarifas para motocicletas</h2>
-
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Por Hora:</label>
-                                                <input class="form-control" type="text" name="motocicleta_hora" required>
-                                            </div>
-                                            
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Por Dia:</label>
-                                                <input class="form-control" type="text" name="motocicleta_dia" required>
-                                            </div>
-
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Por Semana:</label>
-                                                <input class="form-control" type="text" name="motocicleta_semana" required>
-                                            </div>
-
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Por Mes:</label>
-                                                <input class="form-control" type="text" name="motocicleta_mes" required>
-                                            </div>
-
-                                            <h2>Tarifas para Auto</h2>
-
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Por Hora:</label>
-                                                <input class="form-control" type="text" name="auto_hora"  required>
-                                            </div>
-                                            
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Por Dia:</label>
-                                                <input class="form-control" type="text" name="auto_hora"  required>
-                                            </div>
-
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Por Semana:</label>
-                                                <input class="form-control" type="text" name="auto_semana" required>
-                                            </div>
-
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Por Mes:</label>
-                                                <input class="form-control" type="text" name="auto_mes" required>
-                                            </div>
-
                                             <p class="text-center">
-                                                <button class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Agregar Zona</button>
+                                                <button type="submit" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Agregar Zona</button>
                                             </p>
                                         </form>
                                     </div>

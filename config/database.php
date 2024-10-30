@@ -1,7 +1,7 @@
 <?php
 class Database {
     private $host = 'localhost';
-    private $db_name = 'Parking';
+    private $db_name = 'parking';
     private $username = 'root';
     private $password = '';
     public $conn;

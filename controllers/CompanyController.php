@@ -1,40 +1,27 @@
 <?php
-require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../models/Company.php';
+require_once __DIR__ . '/../config/database.php';
 
 class CompanyController {
-    private $companyModel;
-
-    public function __construct() {
+    public function registerCompany() {
         $database = new Database();
-        $this->companyModel = new Company($database->getConnection());
-    }
+        $db = $database->getConnection();
 
-    public function index() {
-        $companies = $this->companyModel->getAll();
-    return $companies; // Asegúrate de retornar las empresas
-    }
+        $company = new Company($db);
 
-    public function registrar() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $nombre = $_POST['nombre'];
-            $descripcion = $_POST['descripcion'];
-    
-            if ($this->companyModel->registrarEmpresa($nombre, $descripcion)) {
-                header("Location: /Parking/views/admin/gestionar_empresas.php?success=1");
+        // Verifica si 'nombre' y 'descripcion' existen en $_POST
+        $company->nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
+        $company->descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : null;
+
+        // Validar que los datos obligatorios no sean null o estén vacíos
+        if ($company->nombre && $company->descripcion) {
+            if ($company->create()) {
+                echo "Empresa registrada exitosamente.";
             } else {
-                header("Location: /Parking/views/admin/gestionar_empresas.php?error=1");
+                echo "Error al registrar la empresa.";
             }
-            exit;
-        }
-    }
-    
-
-    public function delete($id) {
-        if ($this->companyModel->delete($id)) {
-            header('Location: /admin/companies?deleted=1');
         } else {
-            echo "Error al eliminar la empresa";
+            echo "Por favor, complete todos los campos requeridos.";
         }
     }
 }
