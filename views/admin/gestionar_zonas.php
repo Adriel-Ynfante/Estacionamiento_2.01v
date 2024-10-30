@@ -10,7 +10,7 @@ $zonaController->registerZone();
     <title>Gestionar Zonas</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=xdevice-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
     <!-- SideBar -->
@@ -290,13 +290,13 @@ $zonaController->registerZone();
         </div>
     </div>
     <!--====== Scripts -->
-    <script src="./js/jquery-3.1.1.min.js"></script>
-    <script src="./js/sweetalert2.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./js/material.min.js"></script>
-    <script src="./js/ripples.min.js"></script>
-    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="/assets/js/jquery-3.1.1.min.js"></script>
+    <script src="/assets/js/sweetalert2.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/material.min.js"></script>
+    <script src="/assets/js/ripples.min.js"></script>
+    <script src="/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/assets/js/mains.js"></script>
     <script>
         $.material.init();
     </script>
