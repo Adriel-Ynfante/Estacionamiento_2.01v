@@ -27,6 +27,13 @@ if ($userId) {
         header("Location: login_register.php");
         exit();
     }
+    
+    // Obtener vehículos del usuario
+    $vehiculosSql = "SELECT * FROM vehiculos WHERE id_usuario = :user_id";
+    $vehiculosStmt = $db->prepare($vehiculosSql);
+    $vehiculosStmt->bindParam(':user_id', $userId);
+    $vehiculosStmt->execute();
+    $vehiculos = $vehiculosStmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
     header("Location: login_register.php");
     exit();
@@ -68,11 +75,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         $tipoTarjeta = 'Amex';
     }
 
+    // Encriptar el número de tarjeta antes de guardarlo
+    $numeroEncriptado = password_hash($numero, PASSWORD_BCRYPT);
+
     if ($userId) {
-        $insertCardSql = "INSERT INTO tarjetas (numero_tarjeta, fecha_expiracion, tipo_tarjeta, usuario_id) VALUES ( :numero, :expiracion, :tipo, :user_id)";
+        $insertCardSql = "INSERT INTO tarjetas (numero_tarjeta, fecha_expiracion, tipo_tarjeta, usuario_id) VALUES (:numero, :expiracion, :tipo, :user_id)";
         $insertCardStmt = $db->prepare($insertCardSql);
         $insertCardStmt->bindParam(':user_id', $userId);
-        $insertCardStmt->bindParam(':numero', $numero);
+        $insertCardStmt->bindParam(':numero', $numeroEncriptado);
         $insertCardStmt->bindParam(':expiracion', $expiracion);
         $insertCardStmt->bindParam(':tipo', $tipoTarjeta);
 
@@ -84,7 +94,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
     exit();
 }
-
 
 // Manejo de adición de vehículo
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'addVehicle') {
@@ -114,14 +123,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         $insertVehicleStmt->bindParam(':tipo', $tipo);
 
         if ($insertVehicleStmt->execute()) {
-            echo json_encode(['success' => true, 'message' => 'Vehículo añadido con éxito.']);
+            echo json_encode([
+                'success' => true,
+                'message' => 'Vehículo añadido con éxito.',
+                'vehicle' => [
+                    'marca' => $marca,
+                    'modelo' => $modelo,
+                    'placa' => $placa,
+                    'tipo' => $tipo
+                ]
+            ]);
         } else {
             echo json_encode(['success' => false, 'message' => 'Error al añadir el vehículo.']);
         }
     }
     exit();
 }
-
 
 // Manejo de carga de foto de perfil
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['foto'])) {
@@ -155,4 +172,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['foto'])) {
     }
     exit();
 }
-?>

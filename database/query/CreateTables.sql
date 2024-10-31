@@ -79,7 +79,7 @@ CREATE TABLE Reservas (
 
 CREATE TABLE TARJETAS (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    numero_tarjeta VARCHAR(4) NOT NULL,  -- Solo los últimos 4 dígitos de la tarjeta
+    numero_tarjeta VARCHAR(16) NOT NULL,  -- Solo los últimos 4 dígitos de la tarjeta
     fecha_expiracion DATE NOT NULL,
     tipo_tarjeta ENUM('Visa', 'MasterCard', 'Amex', 'Otro') NOT NULL,
     id_usuario INT,

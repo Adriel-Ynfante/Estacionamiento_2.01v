@@ -53,8 +53,11 @@ document.addEventListener('DOMContentLoaded', function() {
     editProfileBtn.addEventListener('click', toggleEditMode);
     toggleSidebarBtn.addEventListener('click', toggleSidebar);
 
+    const profileImageInput = document.getElementById('profileImage');
+    const profilePicture = document.getElementById('profilePicture');
+
     // Manejo del cambio de archivo de la foto de perfil
-    async function handleFileChange(event) {
+    profileImageInput.addEventListener('change', async function(event) {
         const file = event.target.files[0];
         if (!file) return;
 
@@ -62,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('foto', file);
 
         try {
-            const response = await fetch('./assets/uploads', { // Cambia esta ruta según tu configuración
+            const response = await fetch('../../config/ruta_perfil.php', {
                 method: 'POST',
                 body: formData
             });
@@ -70,8 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await response.json();
 
             if (result.success) {
-                const profilePicture = document.getElementById('profilePicture');
-                profilePicture.innerHTML = `<img src="${result.foto}" alt="Foto de perfil">`;
+                profilePicture.innerHTML = `<img src="${result.foto}" alt="Foto de perfil" class="default-avatar">`;
             } else {
                 alert('Error al actualizar la foto de perfil: ' + result.message);
             }
@@ -79,10 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error:', error);
             alert('Error al actualizar la foto de perfil. Por favor, inténtalo de nuevo.');
         }
-    }
-
-    // Evento para manejar el cambio de archivo
-    document.getElementById('fileInput').addEventListener('change', handleFileChange);
+    });
 
     // Manejo del formulario de tarjetas
     addCardForm.addEventListener('submit', async (event) => {
@@ -98,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const result = await response.json();
             if (result.success) {
-                // Crear un nuevo elemento de tarjeta y añadirlo a la lista
                 const cardItem = document.createElement('div');
                 cardItem.textContent = `Tarjeta: ${formData.get('numero')}, Expiración: ${formData.get('expiracion')}`;
                 cardList.appendChild(cardItem);
@@ -120,16 +118,15 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('action', 'addVehicle');
 
         try {
-            const response = await fetch('', { // Asegúrate de que esta URL sea correcta para tu lógica
+            const response = await fetch('', { // Sin utilizar actualmente
                 method: 'POST',
                 body: formData
             });
 
             const result = await response.json();
             if (result.success) {
-                // Crear un nuevo elemento de vehículo y añadirlo a la lista
                 const vehicleItem = document.createElement('div');
-                vehicleItem.textContent = `Vehículo: Marca ${formData.get('marca')}, Modelo ${formData.get('modelo')}, Placa ${formData.get('placa')}`;
+                vehicleItem.textContent = `Vehículo: Marca ${result.vehicle.marca}, Modelo ${result.vehicle.modelo}, Placa ${result.vehicle.placa}`;
                 vehicleList.appendChild(vehicleItem);
                 addVehicleForm.reset(); // Reiniciar el formulario
                 addVehicleForm.style.display = 'none'; // Ocultar el formulario
@@ -141,4 +138,26 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Error al añadir el vehículo. Por favor, inténtalo de nuevo.');
         }
     });
+
+    // Cargar vehículos guardados al inicio
+    async function loadVehicles() {
+        try {
+            const response = await fetch('../../config/ruta_perfil.php'); // 
+            const result = await response.json();
+            if (result.success) {
+                result.vehicles.forEach(vehicle => {
+                    const vehicleItem = document.createElement('div');
+                    vehicleItem.textContent = `Vehículo: Marca ${vehicle.marca}, Modelo ${vehicle.modelo}, Placa ${vehicle.placa}`;
+                    vehicleList.appendChild(vehicleItem);
+                });
+            } else {
+                console.error('Error al cargar vehículos: ' + result.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    // Llamar a la función para cargar vehículos guardados
+    loadVehicles();
 });

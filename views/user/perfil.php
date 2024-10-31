@@ -31,10 +31,10 @@ include '../../config/ruta_perfil.php';
         <main class="content">
             <div class="card profile-card">
                 <div class="profile-left">
-                    <div class="profile-picture" id="profilePicture">
-                        <span class="default-avatar" role="img" aria-label="Avatar de usuario">👤</span>
-                    </div>
-                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                <div class="profile-picture" id="profilePicture">
+                    <img src="../../assets/images/goku_perfil.jpg" alt="Avatar de usuario" class="default-avatar" />
+                </div>
+                <input type="file" id="profileImage" name="profileImage" accept="image/*" />
                     <button id="editProfileBtn" class="btn">Editar Perfil</button>
                 </div>
                 <div class="profile-right">
