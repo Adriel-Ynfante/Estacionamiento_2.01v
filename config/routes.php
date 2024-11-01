@@ -13,7 +13,7 @@ function sanitizeInput($data) {
 
 // Function to determine if an email is a business email
 function isBusinessEmail($email) {
-    $businessDomains = ['empresa.com', 'edu.pe']; // Domains considered as business
+    $businessDomains = ['empresa.pe', 'edu.pe']; // Domains considered as business
     $domain = substr(strrchr($email, "@"), 1); // Extracts the domain from the email
     return in_array($domain, $businessDomains);
 }
